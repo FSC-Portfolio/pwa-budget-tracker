@@ -1,4 +1,6 @@
 const Chart = require("chart.js");
+import { useIndexedDb } from "./indexedDb";
+
 let transactions = [];
 let myChart;
 
@@ -79,6 +81,11 @@ function populateChart() {
   });
 }
 
+const saveRecord = (transaction) => {
+  console.log("saving record offline");
+  useIndexedDb("budget", "budgetStore", "put", transaction);
+}
+
 function sendTransaction(isAdding) {
   let nameEl = document.querySelector("#t-name");
   let amountEl = document.querySelector("#t-amount");
@@ -121,7 +128,8 @@ function sendTransaction(isAdding) {
       Accept: "application/json, text/plain, */*",
       "Content-Type": "application/json"
     }
-  })
+  }
+  )
   .then(response => {    
     return response.json();
   })
