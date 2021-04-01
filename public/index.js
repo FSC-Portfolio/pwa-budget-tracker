@@ -1,5 +1,5 @@
 const Chart = require("chart.js");
-import { useIndexedDB } from "./indexedDb";
+// import { useIndexedDB } from "./indexedDb";
 
 let transactions = [];
 let myChart;
@@ -83,7 +83,8 @@ function populateChart() {
 
 const saveRecord = (transaction) => {
   console.log("saving record offline");
-  useIndexedDB("budget", "budgetStore", "put", transaction);
+  console.log(transaction);
+  // useIndexedDB("budget", "pending", "put", transaction);
 }
 
 function sendTransaction(isAdding) {
